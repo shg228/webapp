@@ -3,13 +3,13 @@
 
 import React from 'react';
 
-import {shallowWithIntl} from 'tests/helpers/intl-test-helper';
+import {shallow} from 'tests/helpers/intl-test-helper';
 
 import LoadingSpinner from './loading_spinner';
 
 describe('components/widgets/loadingLoadingSpinner', () => {
     test('showing spinner with text', () => {
-        const wrapper = shallowWithIntl(<LoadingSpinner text='test'/>);
+        const wrapper = shallow(<LoadingSpinner text='test'/>);
         expect(wrapper).toMatchInlineSnapshot(`
 <span
   className="LoadingSpinner with-text"
@@ -30,7 +30,7 @@ describe('components/widgets/loadingLoadingSpinner', () => {
 `);
     });
     test('showing spinner without text', () => {
-        const wrapper = shallowWithIntl(<LoadingSpinner/>);
+        const wrapper = shallow(<LoadingSpinner/>);
         expect(wrapper).toMatchInlineSnapshot(`
 <span
   className="LoadingSpinner"
