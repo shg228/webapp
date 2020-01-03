@@ -1,36 +1,38 @@
 // Copyright (c) 2015-present Mattermost, Inc. All Rights Reserved.
 // See LICENSE.txt for license information.
 
-import {mount, shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import React from 'react';
 import {OverlayTrigger as BaseOverlayTrigger} from 'react-bootstrap';
 import {FormattedMessage, IntlProvider} from 'react-intl';
 
-import {mountWithIntl} from 'tests/helpers/intl-test-helper';
-
 import OverlayTrigger from './overlay_trigger';
 
 describe('OverlayTrigger', () => {
+    const testId = 'test.value';
+
     const intlProviderProps = {
         defaultLocale: 'en',
         locale: 'en',
         messages: {
-            'test.value': 'Actual value',
+            [testId]: 'Actual value',
         },
     };
     const testOverlay = (
         <FormattedMessage
-            id='test.value'
+            id={testId}
             defaultMessage='Default value'
         />
     );
 
+    // Intercept console error messages since we intentionally cause some as part of these tests
     let originalConsoleError;
 
     beforeEach(() => {
         originalConsoleError = console.error;
 
         console.error = jest.fn((...params) => {
+            // Call the original console.error since the one set up before this test causes the tests to fail
             console.originalError(...params);
         });
     });
