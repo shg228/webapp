@@ -26,15 +26,11 @@ describe('OverlayTrigger', () => {
     );
 
     // Intercept console error messages since we intentionally cause some as part of these tests
-    let originalConsoleError;
+    let originalConsoleError: () => void;
 
     beforeEach(() => {
         originalConsoleError = console.error;
-
-        console.error = jest.fn((...params) => {
-            // Call the original console.error since the one set up before this test causes the tests to fail
-            console.originalError(...params);
-        });
+        console.error = jest.fn();
     });
 
     afterEach(() => {
